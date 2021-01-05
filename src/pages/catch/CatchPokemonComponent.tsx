@@ -40,7 +40,7 @@ export const CatchPokemon = (props: CatchPokemonProps) => {
   useEffect(() => {
     const speed = props.pokemon.value?.stats.filter(stat => stat.stat.name === 'speed')[0].base_stat;
     // 10000 is default number to reduce 10000 default second
-    const speedToSecond = !speed ? 9000 : speed*100;
+    const speedToSecond = !speed ? 10000 : speed*100;
 
     setTimeout(() => {
       setMovement([Math.random() * window.innerWidth, Math.random() * (window.innerHeight/2)]);
