@@ -2,7 +2,7 @@ import { Input, Modal } from "antd";
 import React, { BaseSyntheticEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { PokemonInterface } from "../../interfaces/Pokemon";
-import { setCatchedPokemon } from "../../stores/CatchedPokemon";
+import { setCatchedPokemon } from "../../storages/CatchedPokemon";
 
 interface CatchModalComponentProps {
   visible: boolean,

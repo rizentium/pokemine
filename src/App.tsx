@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/home/Home';
 import MinePage from './pages/mine/Mine';
 import DetailPage from './pages/detail/Detail';
-import { CatchedPokemonContext, getCatchedPokemons } from './stores/CatchedPokemon';
+import { CatchedPokemonContext } from './stores/CatchedPokemon';
 import { useEffect, useState } from 'react';
 import { CatchedPokemonInterface } from './interfaces/CatchedPokemon';
 import CatchPage from './pages/catch/Catch';
+import { getCatchedPokemons } from './storages/CatchedPokemon';
 
 function App() {
   const [ CatchedPokemon, setCatchedPokemon ] = useState<CatchedPokemonInterface[]>([]);

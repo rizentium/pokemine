@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
-import { setReleasePokemon } from "../../stores/CatchedPokemon";
+import { setReleasePokemon } from "../../storages/CatchedPokemon";
 
 interface DetailModalComponentPros {
     visible: {
