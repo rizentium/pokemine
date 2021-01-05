@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useParams } from "react-router-dom";
 import { getPokemonDetail } from "../../api/PokemonApi";
 import { PokemonInterface } from "../../interfaces/Pokemon";
@@ -7,21 +7,24 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 interface CatchPokemonProps {
   updateTotalExp: (payload: number) => void,
-  updateCurrentExp: any
+  updateCurrentExp: any,
+  pokemon: {
+    value: PokemonInterface | undefined;
+    setValue: Dispatch<SetStateAction<PokemonInterface | undefined>>;
+  }
 }
 
 export const CatchPokemon = (props: CatchPokemonProps) => {
 	const [ loading, setLoading ] = useState(true);
-  const [ pokemon, setPokemon ] = useState<PokemonInterface>();
   const [ movement, setMovement ] = useState([0,0]);
 
 	const { id } = useParams<{id: string}>();
 	
 	useEffect(() => {
     const loadPokemon = async () => {
-    	setLoading(true);
+      setLoading(true);
       const response = (await getPokemonDetail(id)).data.pokemon;
-      setPokemon(response);
+      props.pokemon.setValue(response);
 
       // set based health before fight with pokemon
       const health = response.stats.map((data) => data.base_stat).reduce((prev, curr) => prev + curr);
@@ -35,31 +38,30 @@ export const CatchPokemon = (props: CatchPokemonProps) => {
   }, [id]);
 
   useEffect(() => {
-    const speed = pokemon?.stats.filter(stat => stat.stat.name === 'speed')[0].base_stat;
-    const speedToSecond = !speed ? 0 : speed*100;
+    const speed = props.pokemon.value?.stats.filter(stat => stat.stat.name === 'speed')[0].base_stat;
+    // 10000 is default number to reduce 10000 default second
+    const speedToSecond = !speed ? 9000 : speed*100;
 
     setTimeout(() => {
-      setMovement([Math.random() * window.innerWidth, Math.random() * window.innerHeight]);
-    }, 11000 - speedToSecond)
+      setMovement([Math.random() * window.innerWidth, Math.random() * (window.innerHeight/2)]);
+    }, 10000 - speedToSecond)
   }, [movement]);
 
-	return (
-		<div>
-      {
-        loading ?
-          (
-            <LoadingOutlined />
-          ) :
-          (
-            <CatchPokemonImage
-              id="pokemon"
-              loading='lazy'
-              src={pokemon?.sprites.front_default}
-              top={movement[0]}
-              left={movement[1]}
-            />
-          )
-      }
-    </div>
-	);
+  return loading ?
+    (
+      <div style={{
+        textAlign: "center"
+      }}>
+        <LoadingOutlined />
+      </div>
+    ) :
+    (
+      <CatchPokemonImage
+        id="pokemon"
+        loading='lazy'
+        src={props.pokemon.value?.sprites.front_default}
+        top={movement[0]}
+        left={movement[1]}
+      />
+    );
 }

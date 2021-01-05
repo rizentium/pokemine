@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/mine">
             <MinePage />
           </Route>
-          <Route exact path="/detail/:id">
+          <Route exact path="/detail/:id/:catchedId">
             <DetailPage />
           </Route>
           <Route exact path="/catch/:id">

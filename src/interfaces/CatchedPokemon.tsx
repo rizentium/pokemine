@@ -1,6 +1,8 @@
+import { PokemonInterface } from "./Pokemon";
+
 export interface CatchedPokemonInterface {
   id: string;
-  pokemonId?: string;
+  pokemon?: PokemonInterface;
   catchedAt?: string;
   releasedAt?: string;
 }

@@ -4,7 +4,8 @@ import logo from '../assets/imgs/logo.png';
 import { CardBody, CardContainer, CardSubtitle, CardTitle, CardTrailing } from "../styles/CardStyle";
 
 interface PokemonCardProps {
-  title: string;
+  pokemonId?: string;
+  catchedId?: string;
   subtitle: string;
   img?: string;
 }
@@ -14,21 +15,34 @@ function PokemonCardComponent (props: PokemonCardProps) {
   const history = useHistory();
 
   const OnClick = () => {
-    history.push(`/detail/${props.title}`);
+    history.push(`/detail/${props.pokemonId}/${!props.catchedId ? '=' : props.catchedId}`);
   };
 
   return (
     <CardContainer onClick={OnClick}>
       <CardBody>
-          <CardTitle>{props.title}</CardTitle>
-          <CardSubtitle>{props.subtitle}</CardSubtitle>
+        {
+          !props.catchedId ?
+            (
+              <div>
+                <CardTitle>{props.pokemonId}</CardTitle>
+                <CardSubtitle>{props.subtitle}</CardSubtitle>
+              </div>
+            ) :
+            (
+              <div>
+                <CardTitle>{props.catchedId}</CardTitle>
+                <CardSubtitle>{props.pokemonId}</CardSubtitle>
+              </div>
+            )
+        }
       </CardBody>
       <CardTrailing>
         <img
           onError={(event) => (event.target as any).src = logo}
           src={props.img}
           height="50em"
-          alt={props.title}
+          alt={props.pokemonId}
         />
       </CardTrailing>
     </CardContainer>

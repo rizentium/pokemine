@@ -26,7 +26,7 @@ export const HomePageBody = (props: PageBodyProps) => {
   }
 
   const pokemonCount = (pokemonId: string) => {
-    const pokemonLength = props.pokemons.filter((pokemon) => pokemon.pokemonId === pokemonId).length;
+    const pokemonLength = props.pokemons.filter((pokemon) => pokemon.pokemon?.name === pokemonId).length;
     return pokemonLength > 0 ? `${pokemonLength} catched` : 'No catches';
   }
 
@@ -58,7 +58,7 @@ export const HomePageBody = (props: PageBodyProps) => {
             >
               <PokemonCardComponent
                 key={data.id}
-                title={data.name}
+                pokemonId={data.name}
                 subtitle={pokemonCount(data.name)}
                 img={data.image}
               />

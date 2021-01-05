@@ -4,12 +4,19 @@ import React from "react";
 import logo from '../../assets/imgs/logo.png';
 import { CatchedPokemonContext } from "../../stores/CatchedPokemon";
 import { HomePageBody } from "./HomeBodyComponent";
+import { useHistory } from "react-router-dom";
 
 function HomePage () {
+  const history = useHistory();
+
+  const toMinePage = () => {
+    history.push('/mine');
+  }
+
   return (
     <CatchedPokemonContext.Consumer>
       {
-        catchedPokemons => (
+        consumer => (
           <div>
             <PageHeader
               avatar={{ src: logo }}
@@ -17,10 +24,11 @@ function HomePage () {
               extra={[
                 <Badge
                   key="favoritedPokemon"
-                  count={catchedPokemons.length}
+                  count={consumer.length}
                   overflowCount={10}
                 >
                   <Button
+                    onClick={toMinePage}
                     type="primary"
                     shape="circle"
                     icon={<HeartFilled />}
@@ -28,7 +36,7 @@ function HomePage () {
                 </Badge>
               ]}
             />
-            <HomePageBody pokemons={catchedPokemons} />
+            <HomePageBody pokemons={consumer} />
           </div>
         )
       }
