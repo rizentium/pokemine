@@ -14,8 +14,7 @@ export const CatchBodyPage = styled.div({
 	border: '#0000000d',
 	borderWidth: '0.1em 0 0 0',
 	borderStyle: 'solid',
-	padding: '0.5em',
-	textAlignLast: 'center'
+	padding: '0.5em'
 });
 
 export const CatchBottomPage = styled.div({
@@ -42,3 +41,7 @@ export const CatchPokemonImage = styled.img((props: CatchPokemonImageProps) => (
 	left: props.left,
 	position: 'fixed'
 }));
+
+export const CatchExp = styled.div({
+	margin: '0.5em 1em'
+})

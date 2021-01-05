@@ -2,7 +2,7 @@ import Bounce from "bounce.js";
 
 export const CatchActionOnClick = (
 		event: any,
-		health: number,
+		exp: number,
     updateExp: (payload: number) => void,
     winStatus: any
 	) => {
@@ -49,9 +49,11 @@ export const CatchActionOnClick = (
 	goToSelectedPixle.applyTo(document.getElementById('pokeball') as Element);
 
 	if (event.target.id === 'pokemon') {
-		if (health > 0) {
+		if (exp > 0) {
 			updateExp(-100);
-		} else {
+		}
+
+		if (exp < 100) {
 			winStatus(true);
 		}
 	} else {

@@ -6,7 +6,8 @@ import { CatchPokemonImage } from "../../styles/CatchStyle";
 import { LoadingOutlined } from "@ant-design/icons";
 
 interface CatchPokemonProps {
-  updateExp: (payload: number) => void
+  updateTotalExp: (payload: number) => void,
+  updateCurrentExp: any
 }
 
 export const CatchPokemon = (props: CatchPokemonProps) => {
@@ -24,7 +25,8 @@ export const CatchPokemon = (props: CatchPokemonProps) => {
 
       // set based health before fight with pokemon
       const health = response.stats.map((data) => data.base_stat).reduce((prev, curr) => prev + curr);
-      props.updateExp(!health ? 0 : health);
+      props.updateTotalExp(!health ? 0 : health);
+      props.updateCurrentExp(!health ? 0 : health);
 
       setLoading(false);
     }
