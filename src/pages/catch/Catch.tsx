@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import StatisticComponent from "../../components/Statistic";
 import { PokemonInterface } from "../../interfaces/Pokemon";
+import { CatchedPokemonContext } from "../../stores/CatchedPokemon";
 import { CatchBodyPage, CatchBottomPage, CatchContainer, CatchExp } from "../../styles/CatchStyle";
 import { CatchActionOnClick } from "./CatchComponent";
 import { CatchModalComponent } from "./CatchModalComponent";
@@ -13,6 +14,7 @@ function CatchPage () {
   const [ totalExp, setTotalExp ] = useState(1);
   const [ currentExp, setCurrentExp ] = useState(1);
   const [ modalVisible, setModalVisible ] = useState(false);
+  const catchedPokeon = useContext(CatchedPokemonContext);
 
   return (
     <CatchContainer
@@ -44,6 +46,7 @@ function CatchPage () {
         visible={modalVisible}
         setModalVisible={setModalVisible}
         pokemon={pokemon}
+        catchedPokemons={catchedPokeon}
       />
     </CatchContainer>
   );

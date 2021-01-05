@@ -1,22 +1,29 @@
 import { Modal } from "antd";
 import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
-import { setReleasePokemon } from "../../storages/CatchedPokemon";
+import { CatchedPokemonInterface } from "../../interfaces/CatchedPokemon";
+import { getCatchedPokemons, setReleasePokemon } from "../../storages/CatchedPokemon";
 
 interface DetailModalComponentPros {
     visible: {
         value: boolean,
         setVisible: Dispatch<SetStateAction<boolean>>
     },
-    catchedPokemonId: string
+    catchedPokemonId: string;
+    catchedPokemon: CatchedPokemonInterface[];
 }
 
 export const DetailModalComponent = (props: DetailModalComponentPros) => {
     const history = useHistory();
 
-    const actionOnRelease = () => {
-        setReleasePokemon(props.catchedPokemonId);
-        history.goBack();
+    const actionOnRelease = async () => {
+      setReleasePokemon(props.catchedPokemonId);
+      
+      const updatedCatched = (await getCatchedPokemons()).filter(data => !data.releasedAt);
+      props.catchedPokemon.length = 0;
+      props.catchedPokemon.push(...updatedCatched);
+
+      history.goBack();
     }
     const actionOnCancel = () => {
         props.visible.setVisible(false);

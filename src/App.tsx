@@ -17,7 +17,7 @@ function App() {
       setCatchedPokemon(data);
     }
     loadCatchedPokemon();
-  }, [CatchedPokemon])
+  }, [0]);
 
   return (
     <Router>

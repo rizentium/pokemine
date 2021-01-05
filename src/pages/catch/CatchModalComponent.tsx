@@ -1,13 +1,16 @@
 import { Input, Modal } from "antd";
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, { BaseSyntheticEvent, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { CatchedPokemonInterface } from "../../interfaces/CatchedPokemon";
 import { PokemonInterface } from "../../interfaces/Pokemon";
 import { setCatchedPokemon } from "../../storages/CatchedPokemon";
+import { CatchedPokemonContext } from "../../stores/CatchedPokemon";
 
 interface CatchModalComponentProps {
   visible: boolean,
   setModalVisible: any,
-  pokemon: PokemonInterface | undefined
+  pokemon: PokemonInterface | undefined,
+  catchedPokemons: CatchedPokemonInterface[];
 }
 
 export const CatchModalComponent = (props: CatchModalComponentProps) => {
@@ -30,6 +33,7 @@ export const CatchModalComponent = (props: CatchModalComponentProps) => {
       return;
     }
 
+    props.catchedPokemons.push(isSuccess);
     actionOnClick();
     setNickname('');
     actionOnCancel();

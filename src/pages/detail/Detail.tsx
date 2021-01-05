@@ -6,6 +6,7 @@ import { DetailPageBottom } from "./DetailBottomComponent";
 
 function DetailPage () {
   const history = useHistory();
+
   return (
   	<div>
     	<PageHeader
