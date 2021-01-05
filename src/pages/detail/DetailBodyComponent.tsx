@@ -5,7 +5,7 @@ import { getPokemonDetail } from "../../api/PokemonApi";
 import MoveComponent from "../../components/Move";
 import StatisticComponent from "../../components/Statistic";
 import { PokemonInterface } from "../../interfaces/Pokemon";
-import { CardContainer, CardBody, CardTitle, CardSubtitle, CardTrailing } from "../../styles/CardStyle";
+import { CardContainer, CardBody, CardTitle, CardSubtitle, CardTrailing, CardTitleExtend } from "../../styles/CardStyle";
 import { DetailBody, DetailLastRow } from "../../styles/DetailStyle";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { LabelComponent } from "../../components/Label";
@@ -14,7 +14,7 @@ export const DetailPageBody = () => {
   const [ loading, setLoading ] = useState(true);
   const [ pokemon, setPokemon ] = useState<PokemonInterface>();
   const [ showMoves, setShowMoves ] = useState<number>(3);
-  const { id } = useParams<{id: string}>();
+  const { id, catchedId } = useParams<{id: string, catchedId: string}>();
     
   const showMoveSection = () => {
     const moveLength = pokemon?.moves.length ? pokemon.moves.length : 0;
@@ -43,9 +43,20 @@ export const DetailPageBody = () => {
             nomargin
           >
             <CardBody>
-              <CardTitle>
-                {pokemon?.name}
-              </CardTitle>
+              {
+                catchedId !== '=' ?
+                (
+                  <CardTitle>
+                    {catchedId}
+                    <CardTitleExtend>{pokemon?.name}</CardTitleExtend>
+                  </CardTitle>
+                ) :
+                (
+                  <CardTitle>
+                    {pokemon?.name}
+                  </CardTitle>
+                )
+              }
               <CardSubtitle>
                 {pokemon?.height ? `${pokemon?.height}"/ ` : ''}
                 {pokemon?.weight ? `${pokemon?.weight} Kg` : ''}

@@ -1,6 +1,6 @@
 import { Input, Modal } from "antd";
 import React, { BaseSyntheticEvent, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { PokemonInterface } from "../../interfaces/Pokemon";
 import { setCatchedPokemon } from "../../stores/CatchedPokemon";
 
@@ -13,7 +13,6 @@ interface CatchModalComponentProps {
 export const CatchModalComponent = (props: CatchModalComponentProps) => {
   const [ Nickname, setNickname ] = useState('');
   const [ IsNameAllowed, setIsNameAllowed ] = useState(true);
-  const { id: pokemonId } = useParams<{id: string}>();
   const history = useHistory();
 
   const actionOnClick = () => {

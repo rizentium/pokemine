@@ -20,6 +20,23 @@ export const setCatchedPokemon = async (payload: CatchedPokemonInterface) => {
   }
 }
 
+export const setReleasePokemon = async (catchedId: string) => {
+  const pokemon = await getCatchedPokemon(catchedId);
+
+  if (pokemon) {
+    const newData: CatchedPokemonInterface = {
+      id: pokemon.id,
+      pokemon: pokemon.pokemon,
+      catchedAt: pokemon.catchedAt,
+      releasedAt: new Date().toUTCString()
+    };
+
+    return await CatchedPokemonStorage.setItem(pokemon.id, newData);
+  } else {
+    return false;
+  }
+}
+
 export const getCatchedPokemon = (id: string) => {
   return CatchedPokemonStorage.getItem<CatchedPokemonInterface>(id);
 }
@@ -33,7 +50,9 @@ export const getCatchedPokemons = async () => {
     const data = await getCatchedPokemon(keys[x]);
     
     if (data) {
-      result.push(data);
+      if (!data.releasedAt) {
+        result.push(data);
+      }
     }
   }
 

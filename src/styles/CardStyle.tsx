@@ -17,6 +17,7 @@ export const CardContainer = styled.div((props: CardContainerProps) => ({
 }));
 
 export const CardBody = styled.span({
+  width: '100%',
   alignSelf: 'center'
 })
 
@@ -24,8 +25,14 @@ export const CardTitle = styled.p({
   margin: 0,
   fontWeight: 500,
   fontSize: '1.25em',
-  alignSelf: 'center'
+  alignSelf: 'center',
+  lineHeight: '1.25em'
 });
+
+export const CardTitleExtend = styled.span({
+  fontWeight: 300,
+  paddingLeft: '0.25em'
+})
 
 export const CardTitleTrailing = styled.span({
   textAlign: 'right'
