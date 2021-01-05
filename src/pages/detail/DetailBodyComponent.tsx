@@ -8,6 +8,7 @@ import { PokemonInterface } from "../../interfaces/Pokemon";
 import { CardContainer, CardBody, CardTitle, CardSubtitle, CardTrailing } from "../../styles/CardStyle";
 import { DetailBody, DetailLastRow } from "../../styles/DetailStyle";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { LabelComponent } from "../../components/Label";
 
 export const DetailPageBody = () => {
   const [ loading, setLoading ] = useState(true);
@@ -59,6 +60,13 @@ export const DetailPageBody = () => {
             </CardTrailing>
           </CardContainer>
         </Row>
+        <Divider />
+        <div>
+          <h3>Types</h3>
+          {
+            pokemon?.types.map(data => (<LabelComponent>{data.type.name}</LabelComponent>))
+          }
+        </div>
         <Divider />
         <div>
           <h3>Statistics</h3>
