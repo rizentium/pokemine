@@ -1,7 +1,7 @@
 import Bounce from "bounce.js";
 
 export const CatchActionOnClick = (
-		event: any,
+		clickEvent: any,
 		exp: number,
     updateExp: (payload: number) => void,
     winStatus: any
@@ -12,9 +12,9 @@ export const CatchActionOnClick = (
 	const displayWidth = window.innerWidth;
 	
 	const selectedPoint = {
-		x: event.clientX - (displayWidth/2),
+		x: clickEvent.clientX - (displayWidth/2),
 		// 40 is a fixed number for normalize y point
-		y: (event.clientY + 40) - displayHeight
+		y: (clickEvent.clientY + 40) - displayHeight
 	};
 
 	const goToSelectedPixle = bounce
@@ -48,7 +48,7 @@ export const CatchActionOnClick = (
 		
 	goToSelectedPixle.applyTo(document.getElementById('pokeball') as Element);
 
-	if (event.target.id === 'pokemon') {
+	if (clickEvent.target.id === 'pokemon') {
 		if (exp > 0) {
 			updateExp(-100);
 		}

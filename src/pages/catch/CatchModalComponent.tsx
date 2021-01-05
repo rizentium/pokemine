@@ -10,20 +10,28 @@ interface CatchModalComponentProps {
 
 export const CatchModalComponent = (props: CatchModalComponentProps) => {
 	const [ Nickname, setNickname ] = useState('');
-	const { id } = useParams<{id: string}>();
+	const [ IsNameAllowed, setIsNameAllowed ] = useState(true);
+	const { id: pokemonId } = useParams<{id: string}>();
 	const history = useHistory();
 
 	const actionOnClick = () => {
 		props.setModalVisible(!props.visible);
 	}
 
-	const actionOnCatch = () => {
-		setCatchedPokemon({
-			nickname: Nickname,
-			pokemonId: id
+	const actionOnCatch = async () => {
+		const isSuccess = await setCatchedPokemon({
+			id: Nickname,
+			pokemonId: pokemonId
 		})
+
+		if (!isSuccess) {
+			setIsNameAllowed(false);
+			return;
+		}
+
 		actionOnClick();
-		setNickname('');
+    setNickname('');
+    actionOnCancel();
 	}
 
 	const actionOnCancel = () => {
@@ -46,8 +54,11 @@ export const CatchModalComponent = (props: CatchModalComponentProps) => {
 		>
       <Input
 				placeholder="Set Your Pokemon Name"
-				onChange={inputOnChange}
-				/>
+        onChange={inputOnChange}
+			/>
+      {
+        !IsNameAllowed && (<small>Name is already exist, please use another name</small>)
+      }
     </Modal>
 	);
 }

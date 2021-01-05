@@ -1,7 +1,6 @@
 export interface CatchedPokemonInterface {
-    id?: string;
-    pokemonId?: string;
-    nickname: string;
-    catchedAt?: string;
-    releasedAt?: string;
+  id: string;
+  pokemonId?: string;
+  catchedAt?: string;
+  releasedAt?: string;
 }
