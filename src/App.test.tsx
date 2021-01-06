@@ -1,8 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import App from './App';
 
 describe("App", () => {
+  let container: any;
+
   beforeAll(() => {
     window.matchMedia = window.matchMedia || function() {
       return {
@@ -13,8 +15,12 @@ describe("App", () => {
     };
   });
 
-  test('render correctly', () => {
-    render(<App />);
+  it('render correctly', async () => {
+
+    await act( async () => {
+      render(<App />, container);
+    })
+
     const linkElement = screen.getByText("Pokemine");
     expect(linkElement).toBeInTheDocument();
   });

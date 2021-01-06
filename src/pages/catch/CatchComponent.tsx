@@ -63,8 +63,6 @@ export const CatchActionOnClick = (props: CatchActionOnClickProps) => {
     if (props.currentExp.value < 100) {
       props.setModelVisible(true);
     }
-  } else {
-    console.log('Missed!');
   }
 
   setTimeout(() => {

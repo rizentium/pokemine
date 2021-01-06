@@ -12,11 +12,9 @@ function App() {
   const [ CatchedPokemon, setCatchedPokemon ] = useState<CatchedPokemonInterface[]>([]);
 
   useEffect(() => {
-    const loadCatchedPokemon = async () => {
-      const data = await getCatchedPokemons();
+    getCatchedPokemons().then(data => {
       setCatchedPokemon(data);
-    }
-    loadCatchedPokemon();
+    })
   }, [0]);
 
   return (
